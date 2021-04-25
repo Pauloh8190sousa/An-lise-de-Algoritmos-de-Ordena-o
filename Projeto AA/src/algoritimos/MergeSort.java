@@ -1,6 +1,12 @@
 package algoritimos;
 public class MergeSort {
 	/**
+	 * trocadeDeChave: contador de trocas
+	 * comparacoes: contador de comparacoes
+	 */
+	private static double trocaDeChave;
+	private static double comparacoes;
+	/**
 	 * Método merge sort
 	 * @param vetor: listas com os elementos a serem ordenados
 	 */
@@ -45,23 +51,41 @@ public class MergeSort {
         //numero de elementos
         int numElements = rightEnd - leftPos + 1;
         //laço para percorrer os dois lados
-        while( leftPos <= leftEnd && rightPos <= rightEnd )
+        while( leftPos <= leftEnd && rightPos <= rightEnd ){
         	//se leftPos for menor ou igual rightPoss então ele troca de posição
-            if( vetor[leftPos] <= ( vetor[rightPos] ))
+        	comparacoes+=1;
+        	if( vetor[leftPos] <= ( vetor[rightPos] )){
                 tmpArray[ tmpPos++ ] = vetor[ leftPos++ ];
-            else
+                trocaDeChave+=1;
+            }
+            else{
             	//se leftPos não for menor que rightPos então troca rightPos
                 tmpArray[ tmpPos++ ] = vetor[rightPos++];
+                trocaDeChave+=1;
+            }
+        }
         //laço para percorrer o lado esquerdo
-        while( leftPos <= leftEnd )    
+        while( leftPos <= leftEnd ){
         	//incrementa o indice
             tmpArray[ tmpPos++ ] = vetor[leftPos++];
+            trocaDeChave+=1;
         //laço para percorrer o lado direito
-        while( rightPos <= rightEnd )  
+        }
+        while( rightPos <= rightEnd ){  
         	//incrementa o indice
             tmpArray[ tmpPos++ ] = vetor[rightPos++];
+            trocaDeChave+=1;
         //passa os numeros ordenados para o vetor
-        for( int i = 0; i < numElements; i++, rightEnd-- )
+        }
+        for( int i = 0; i < numElements; i++, rightEnd-- ){
         	vetor[rightEnd] = tmpArray[rightEnd];
+        	trocaDeChave+=1;
+        }
+    }
+    public static double getTrocas(){
+    	return trocaDeChave;
+    }
+    public static double getComparacoes(){
+    	return comparacoes;
     }
 }

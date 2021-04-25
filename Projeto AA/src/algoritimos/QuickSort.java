@@ -2,6 +2,12 @@ package algoritimos;
 
 public class QuickSort {
 	/**
+	 * trocadeDeChave: contador de trocas
+	 * comparacoes: contador de comparacoes
+	 */
+	private static double trocaDeChave;
+	private static double comparacoes;
+	/**
 	 * Método de ordenação
 	 * @param vetor: a lista de elementos inteiros
 	 * @param inicio: indice do primeiro elemento da lista
@@ -28,28 +34,35 @@ public class QuickSort {
 	  private static int separar(int[] vetor, int inicio, int fim) {
 		  // pega o elemento do inicio para ser o pivo
 		  int pivo = vetor[inicio];
+		  trocaDeChave+=1;
 		  // pega o indice inicio+1
 		  // a variavel f assume o valor de fim
 		  int i = inicio + 1, f = fim;
 		  //laço para ordenar o algoritmo enquanto i menor ou igual a f
 		  while (i <= f) {
 			  //se o indice i for menor ou igual o pivo o i é incrementado
-               if (vetor[i] <= pivo)
+			  comparacoes+=1; 
+			  if (vetor[i] <= pivo){
             	   //incrementação
                       i++;
+               }
                //se o pivo for menor que o indice f a variavel f é desincrementado
-               else if (pivo < vetor[f])
+			  else if (pivo < vetor[f]){
             	   //desincrementado
                       f--;
-               // se não for nenhuma opção anterior então entra nessa condição
+               }
+            // se não for nenhuma opção anterior então entra nessa condição
                else {
             	   //indice da troca onde está o elemento
                       int troca = vetor[i];
+                      trocaDeChave+=1;
                       //troca o elemento do indice i pelo do indice f
                       vetor[i] = vetor[f];
+                      trocaDeChave+=1;
                       //troca o elemento do indice f pelo troca que guarda o elemento
                       //do indice i
                       vetor[f] = troca;
+                      trocaDeChave+=1;
                       //incrementa o i
                       i++;
                       //desincrementa o f
@@ -58,10 +71,18 @@ public class QuickSort {
 		  }
 		  //elemento do indice inicio troca pelo do indice f
 		  vetor[inicio] = vetor[f];
+		  trocaDeChave+=1;
 		  //elemento do indice f troca pelo do pivo que guarda o elemento 
 		  // do indice inicio
 		  vetor[f] = pivo;
+		  trocaDeChave+=1;
 		  // retorna f que é o indice do pivo
 		  return f;
+	  }
+	  public static double getTrocas(){
+		  return trocaDeChave;
+	  }
+	  public static double getComparacoes(){
+		  return comparacoes;
 	  }
 	}

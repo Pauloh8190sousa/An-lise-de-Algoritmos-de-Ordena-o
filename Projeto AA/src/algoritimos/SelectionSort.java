@@ -2,6 +2,12 @@ package algoritimos;
 
 public class SelectionSort {
 	/**
+	 * trocadeDeChave: contador de trocas
+	 * comparacoes: contador de comparacoes
+	 */
+	private static double trocaDeChave;
+	private static double comparacoes;
+	/**
 	 * Método de ordenar
 	 * @param array:vetor com os elementos
 	 */
@@ -13,6 +19,7 @@ public class SelectionSort {
 			//laço que percorrer o vetor até o último elemento
 			for (int i = menor + 1; i < vetor.length; i++) {
 				//compara se o elemento da posiçao i é menor que o da posiçao menor
+				comparacoes+=1;
 				if (vetor[i] < vetor[menor]) {
 					//se for menor, o atributo menor assumi o valor de i
 					menor = i;
@@ -22,11 +29,20 @@ public class SelectionSort {
 			if (menor != fixo) {
 				// pega o elemento da posição fixo
 				int t = vetor[fixo];
+				trocaDeChave+=1;
 				//troca de posição o elemento do indice menor com o do fixo
 				vetor[fixo] = vetor[menor];
+				trocaDeChave+=1;
 				//troca de posição com o t que guarda o elemento do indice fixo
 				vetor[menor] = t;
+				trocaDeChave+=1;
 			}
 		}
+	}
+	public static double getTrocas(){
+		return trocaDeChave;
+	}
+	public static double getComparacoes(){
+		return comparacoes;
 	}
 }
